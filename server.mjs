@@ -3,6 +3,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 
+import plantListRoute from './routes/plantListRoute.mjs'
+
 /** Configurations
  * Loads the .env file and makes the environment variables defined in it available to your Node.js application.
  
@@ -31,6 +33,10 @@ try {
  * 1.Defines a route handler for the root URL (/). When a GET request is made to the root URL, it responds with 'Welcome'.
  */
 app.use(express.json());
+
+
+//Use route files
+app.use(plantListRoute)
 
 app.get('/', async (req, res) => {
     res.send('Welcome')

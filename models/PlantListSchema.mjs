@@ -17,4 +17,4 @@ plantListSchema.index({ plant_name: 1 }, { unqiue: true })
 
 
 // Create a model based on the schema
-export default mongoose.model('Plants', plantListSchema);
+export default mongoose.model('PlantList', plantListSchema);
