@@ -1,16 +1,17 @@
 import express from 'express'
 const router = express.Router()
 
-import PlantList from '../models/plantListSchema.mjs'
+//import PlantList from '../models/plantListSchema.mjs'
 
+import PlantList from '../models/favListSchema.mjs'
 //Define routes for plant list collection
 
 //Read all plants
-router.get('/plants', async (req, res) => {
+router.get('/api/favorites', async (req, res) => {
     try {
         const allPlants = await PlantList.find({})
         res.send(allPlants)
-        
+
     } catch (err) {
         console.log(err);
         res.status(500).json({ msg: 'Server Error' })
@@ -20,12 +21,16 @@ router.get('/plants', async (req, res) => {
 //Create a plant
 /**
  { 
-    "plant_name": "Monstera Deliciosa",
-      "plant_type": "Houseplant",  
-      "description": "This Monstera Deliciosa was purchased from a local nursery. It has large, glossy leaves with fenestrations. It's been thriving in bright, indirect light in my living room."
- }
+ 
+   "plant_scientific_name": "plant3",
+   "plant_common_name": "Strfsfing",
+   "plant_family": "Stsdfring",
+   "plant_genus": "Strsddsfing",
+   "description": "Strdfsdgjglsdfsng"
+  
+}
  */
-router.post('/plants', async (req, res) => {
+router.post('/api/favorites', async (req, res) => {
     try {
         let newPlants = new PlantList(req.body);
         //Save the user to the database
@@ -52,7 +57,7 @@ router.post('/plants', async (req, res) => {
       "description": "This Monstera Deliciosa was purchased from a local nursery. It has large, glossy leaves with fenestrations. It's been thriving in bright, indirect light in my living room."
  }
 **/
-router.put('/plants/:id', async (req, res) => {
+router.put('/api/favorites/:id', async (req, res) => {
     try {
         const plant = await PlantList.findById(req.params.id);
         if (!plant) {
@@ -77,7 +82,7 @@ router.put('/plants/:id', async (req, res) => {
 /**
  * ex:http://localhost:3000/plants/:id
  */
-router.delete('/plants/:id', async (req, res) => {
+router.delete('/api/favorites/:id', async (req, res) => {
     try {
         const plant = await PlantList.findById(req.params.id);
         if (!plant) {
