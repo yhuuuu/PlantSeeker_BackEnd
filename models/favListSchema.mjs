@@ -11,11 +11,11 @@ const favListSchema = new mongoose.Schema({
     plant_common_name: String,
     plant_family: String,
     plant_genus: String,
-    description: String,
+    notes: String,
 })
 
 //Set up indexes
-favListSchema.index({ user_id: 1 }, { unqiue: true })
+favListSchema.index({ plant_id: 1 }, { unqiue: true })
 favListSchema.index({ plant_name: 1 }, { unqiue: true })
 
 
