@@ -1,12 +1,11 @@
 import express from 'express'
 const router = express.Router()
 
-//import PlantList from '../models/plantListSchema.mjs'
-
 import PlantList from '../models/favListSchema.mjs'
-//Define routes for plant list collection
 
-//Read all plants
+// @route   GET /api/favorites
+// @desc    Read all plants
+// @access  Public
 router.get('/api/favorites', async (req, res) => {
     try {
         const allPlants = await PlantList.find({})
@@ -18,18 +17,23 @@ router.get('/api/favorites', async (req, res) => {
     }
 })
 
-//Create a plant
+// @route   POST /api/favorites
+// @desc    Create a new plant
+// @access  Public
+// @param   {Object} req.body - The plant data to be created
 /**
- { 
- 
-   "plant_scientific_name": "plant3",
-   "plant_common_name": "Strfsfing",
-   "plant_family": "Stsdfring",
-   "plant_genus": "Strsddsfing",
-   "description": "Strdfsdgjglsdfsng"
-  
-}
+ * @example
+ * Request URL: http://localhost:3000/api/favorites
+ * Request Body:
+ * {
+ *   "plant_scientific_name": "plant3",
+ *   "plant_common_name": "plant3_common_name",
+ *   "plant_family": "plant3_family",
+ *   "plant_genus": "plant3_genus",
+ *   "notes": "I want this plant"
+ * }
  */
+
 router.post('/api/favorites', async (req, res) => {
     try {
         let newPlants = new PlantList(req.body);
@@ -48,15 +52,15 @@ router.post('/api/favorites', async (req, res) => {
     }
 })
 
-//Update plant
-/* 
-   ex: http://localhost:3000/plants/:id
-   {
-    "plant_name": "Here is new Plant",
-      "plant_type": "Houseplant",  
-      "description": "This Monstera Deliciosa was purchased from a local nursery. It has large, glossy leaves with fenestrations. It's been thriving in bright, indirect light in my living room."
- }
-**/
+// @route   PUT /api/favorites/:id
+// @desc    Update a plant by ID
+// @access  Public
+// @param   {string} :id - The ID of the plant to be updated
+/**
+ * @example
+ * Request URL: http://localhost:3000/api/favorites/:id
+ */
+
 router.put('/api/favorites/:id', async (req, res) => {
     try {
         const plant = await PlantList.findById(req.params.id);
@@ -78,9 +82,14 @@ router.put('/api/favorites/:id', async (req, res) => {
     }
 })
 
-//Delete plant
+
+// @route   DELETE /api/favorites/:id
+// @desc    DELETE a plant by ID
+// @access  Public
+// @param   {string} :id - The ID of the plant to be updated
 /**
- * ex:http://localhost:3000/plants/:id
+ * @example
+ * Request URL: http://localhost:3000/api/favorites/:id
  */
 router.delete('/api/favorites/:id', async (req, res) => {
     try {
