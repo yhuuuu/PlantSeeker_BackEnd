@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(cors())
 
 //Use route files
-app.use(favorites)
+app.use('/',favorites)
 
 app.get('/', async (req, res) => {
     res.send('Welcome')
